@@ -41,10 +41,10 @@ pipeline {
       }
     }
 
-    stage('Deploy to Dev') {
+    stage('OCI Image BnP') {
       steps {
-        // TODO
-        sh "echo done"
+       container('kaniko') {
+         sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=docker.io/oliva/dso-demo'
       }
     }
   }
